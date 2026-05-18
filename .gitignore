@@ -1,0 +1,13 @@
+.env
+vendor/
+node_modules/
+cookies.txt
+
+# PHP session files
+tmp/sessions/*
+!tmp/sessions/.gitkeep
+
+# Local AI tooling
+.agents/
+.codex/
+.claude/

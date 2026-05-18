@@ -1,0 +1,138 @@
+<canvas id="particleCanvas"></canvas>
+
+<div class="page-hero" id="pageHero">
+  <div class="page-hero-bg" id="heroBg"></div>
+  <div class="container loyalty-hero-container">
+    <p class="eyebrow" id="heroEyebrow">Member Rewards</p>
+    <h1 id="heroTitle">Your Loyalty <em>Journey</em></h1>
+    <p id="heroSub">Every purchase brings you closer to extraordinary privileges.</p>
+  </div>
+</div>
+
+<div id="loyaltyGate" class="loyalty-gate-hidden">
+  <div class="gate-card">
+    <div class="gate-lock-icon"><i class="bi bi-lock-fill"></i></div>
+    <h2 class="gate-title">Members <em>Only</em></h2>
+    <p class="gate-sub">Sign in to view your loyalty points, membership tier, and rewards history.</p>
+    <a href="login.html" class="btn-luxury gate-btn">Sign In &nbsp;<i class="bi bi-arrow-right"></i></a>
+    <a href="login.html" class="gate-register-link">New here? Create an account →</a>
+  </div>
+</div>
+
+<div class="loyalty-wrap">
+  <div class="container">
+    <div class="demo-panel reveal" id="rewardPanel">
+      <p>Loyalty reward status</p>
+      <div class="demo-line" id="pointsLine">
+        <div class="demo-line-fill" id="pointsLineFill"></div>
+      </div>
+      <div class="demo-scale-labels">
+        <span>0 pts · Bronze</span>
+        <span>1,000 pts · Gold</span>
+        <span>3,000 pts · Platinum</span>
+      </div>
+      <div class="reward-panel-note" id="rewardPanelNote">Sign in to see your current reward.</div>
+    </div>
+
+    <div class="member-card-wrap reveal">
+      <div class="member-card" id="memberCard">
+        <div class="card-watermark" id="cardWatermark">Gold</div>
+        <div class="card-top">
+          <div class="card-brand" id="cardBrand">AB Store</div>
+          <div class="card-level-badge" id="cardBadge">Gold Member</div>
+        </div>
+        <div class="card-middle text-center">
+          <span class="card-icon" id="cardIcon">⭐</span>
+          <div class="card-points" id="cardPoints">1,200</div>
+          <div class="card-pts-label">Loyalty Points</div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-name" id="cardName">Ahmed B.</div>
+          <div class="card-member-id" id="cardMemberId">Member ID: AB-00421</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-wrap reveal">
+      <div class="progress-labels">
+        <span id="progressFrom">Gold · 1,200 pts</span>
+        <span id="progressTo">Platinum at 3,000 pts</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-note" id="progressNote">1,800 pts to Platinum</div>
+    </div>
+
+    <div class="section-label reveal loyalty-section-label" id="tierLabel">Membership Tiers</div>
+    <div class="row g-3 mb-5 reveal">
+      <div class="col-md-4">
+        <div class="tier-card bronze-tier" id="tierBronze">
+          <span class="tier-icon">🥉</span>
+          <div class="tier-name">Bronze</div>
+          <div class="tier-range">0 – 999 points</div>
+          <div class="tier-discount">5% Off</div>
+          <ul class="tier-perks">
+            <li>5% discount on all orders</li>
+            <li>Birthday bonus points</li>
+            <li>Access to member newsletter</li>
+            <li>Free standard shipping over ₪100</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="tier-card gold-tier" id="tierGold">
+          <span class="tier-icon">🥇</span>
+          <div class="tier-name">Gold</div>
+          <div class="tier-range">1,000 – 2,999 points</div>
+          <div class="tier-discount">10% Off</div>
+          <ul class="tier-perks">
+            <li>10% discount on all orders</li>
+            <li>Early access to new launches</li>
+            <li>Double points on weekends</li>
+            <li>Free standard shipping always</li>
+            <li>Priority customer support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="tier-card platinum-tier" id="tierPlatinum">
+          <span class="tier-icon">💎</span>
+          <div class="tier-name">Platinum</div>
+          <div class="tier-range">3,000+ points</div>
+          <div class="tier-discount">20% Off</div>
+          <ul class="tier-perks">
+            <li>20% discount on all orders</li>
+            <li>Exclusive limited-edition access</li>
+            <li>Triple points on all purchases</li>
+            <li>Free express shipping always</li>
+            <li>Personal fragrance consultant</li>
+            <li>Annual gift of the season</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label reveal loyalty-section-label" id="historyLabel">Points History</div>
+    <div class="history-card reveal">
+      <div class="history-header">
+        <i class="bi bi-clock-history loyalty-history-icon" id="historyIcon"></i>
+        <h5>Recent Activity</h5>
+      </div>
+      <div id="historyRows"></div>
+    </div>
+  </div>
+</div>
+
+<div id="floatLogo">
+  <div class="float-ring float-ring-1"></div>
+  <div class="float-ring float-ring-2"></div>
+  <div class="float-ring float-ring-3"></div>
+  <div class="float-particles">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <img src="images/logo.webp" alt="AB Store" id="floatLogoImg" />
+</div>

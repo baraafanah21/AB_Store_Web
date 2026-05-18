@@ -1,0 +1,400 @@
+/* ============================================================
+   CSS Variables
+   ============================================================ */
+:root {
+    --ab-accent: #8b5e3c;
+    --ab-border: #d8cda9;
+    --ab-border-muted: #ece6d4;
+    --ab-card-bg: #ffffff;
+    --ab-card-border: #e8e3d6;
+    --ab-code-bg: #1e1e1e;
+    --ab-code-muted: #7f849c;
+    --ab-code-text: #d4d4d4;
+    --ab-dark: #1a1a1a;
+    --ab-darkest: #111111;
+    --ab-gold: #c9a84c;
+    --ab-gray: #b1a78b;
+    --ab-hero-end: #2b2117;
+    --ab-hero-text: #e0d6c1;
+    --ab-light: #f8f5f0;
+    --ab-placeholder-bg: #f3efe5;
+    --ab-placeholder-text: #b8aa86;
+    --ab-search-bg: #ffffff;
+    --ab-search-text: #222222;
+    --ab-shadow: rgba(0, 0, 0, 0.12);
+    --ab-shadow-strong: rgba(0, 0, 0, 0.25);
+    --ab-status-danger: #d9534f;
+    --ab-status-niche: #7a4ed9;
+    --ab-status-success: #2c8a4f;
+}
+
+/* ============================================================
+   Global Styles
+   ============================================================ */
+body {
+    background: var(--ab-light);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+}
+
+main,
+.page-main {
+    flex: 1 0 auto;
+}
+
+a {
+    color: var(--ab-accent);
+}
+
+a:hover {
+    color: var(--ab-gold);
+}
+
+.ab-hero {
+    background: linear-gradient(135deg, var(--ab-darkest) 0%, var(--ab-dark) 60%, var(--ab-hero-end) 100%);
+    color: var(--ab-light);
+    padding: 5rem 1rem 4rem;
+    text-align: center;
+}
+
+.ab-hero h1 {
+    color: var(--ab-gold);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.ab-hero-search {
+    margin: 0 auto;
+    max-width: 560px;
+    position: relative;
+}
+
+.tagline {
+    color: var(--ab-hero-text);
+    font-style: italic;
+}
+
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--ab-gold);
+}
+
+.search-results {
+    background: var(--ab-search-bg);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 8px 24px var(--ab-shadow-strong);
+    color: var(--ab-search-text);
+    left: 0;
+    margin-top: 4px;
+    max-height: 360px;
+    overflow-y: auto;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 50;
+}
+
+.search-results:empty {
+    display: none;
+}
+
+.search-result-row {
+    align-items: center;
+    border-bottom: 1px solid var(--ab-border-muted);
+    color: var(--ab-search-text);
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    text-decoration: none;
+}
+
+.search-result-image {
+    border-radius: 4px;
+    height: 42px;
+    object-fit: cover;
+    width: 42px;
+}
+
+.search-result-placeholder {
+    background: var(--ab-placeholder-bg);
+    border-radius: 4px;
+    height: 42px;
+    width: 42px;
+}
+
+.sort-select-auto {
+    width: auto;
+}
+
+.cart-total-card {
+    background: var(--ab-card-bg);
+    border: 1px solid var(--ab-border-muted);
+}
+
+/* ============================================================
+   Product Cards
+   ============================================================ */
+.product-card {
+    background: var(--ab-card-bg);
+    border: 1px solid var(--ab-card-border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.product-card:hover {
+    border-color: var(--ab-gold);
+    box-shadow: 0 10px 30px var(--ab-shadow);
+    transform: translateY(-2px);
+}
+
+.product-card .product-img {
+    background: var(--ab-placeholder-bg);
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-card .product-img-placeholder {
+    align-items: center;
+    background: var(--ab-placeholder-bg);
+    color: var(--ab-placeholder-text);
+    display: flex;
+    font-size: 2rem;
+    height: 220px;
+    justify-content: center;
+    width: 100%;
+}
+
+.product-card .product-brand {
+    color: var(--ab-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.product-card .product-name {
+    color: var(--ab-dark);
+    font-weight: 600;
+    margin: 0.25rem 0 0.5rem;
+}
+
+.product-card .product-price {
+    color: var(--ab-dark);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.product-card .product-price .old-price {
+    color: var(--ab-gray);
+    font-size: 0.85em;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    text-decoration: line-through;
+}
+
+.product-card .product-stars {
+    color: var(--ab-gold);
+    font-size: 0.9rem;
+}
+
+.product-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.product-image-cover {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-thumb {
+    border-radius: 4px;
+    height: 42px;
+    object-fit: cover;
+    width: 42px;
+}
+
+.product-thumb-placeholder {
+    align-items: center;
+    background: var(--ab-placeholder-bg);
+    border-radius: 4px;
+    color: var(--ab-placeholder-text);
+    display: inline-flex;
+    font-size: 0.75rem;
+    height: 42px;
+    justify-content: center;
+    width: 42px;
+}
+
+.preview-frame {
+    align-items: center;
+    background: var(--ab-placeholder-bg);
+    color: var(--ab-placeholder-text);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.filter-bar {
+    background: var(--ab-card-bg);
+    border: 1px solid var(--ab-border-muted);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+}
+
+.filter-bar .btn-group .btn {
+    border-color: var(--ab-border);
+}
+
+.filter-bar .btn-check:checked + .btn,
+.filter-bar .btn-group .btn.active {
+    background: var(--ab-dark);
+    border-color: var(--ab-dark);
+    color: var(--ab-gold);
+}
+
+.wishlist-btn .bi-heart-fill {
+    display: none;
+}
+
+.wishlist-btn.wishlisted {
+    border-color: var(--ab-status-danger);
+    color: var(--ab-status-danger);
+}
+
+.wishlist-btn.wishlisted .bi-heart {
+    display: none;
+}
+
+.wishlist-btn.wishlisted .bi-heart-fill {
+    display: inline-block;
+}
+
+/* ============================================================
+   Badges
+   ============================================================ */
+.badge-new {
+    background-color: var(--ab-status-success);
+    color: var(--ab-card-bg);
+}
+
+.badge-niche {
+    background-color: var(--ab-status-niche);
+    color: var(--ab-card-bg);
+}
+
+.badge-sale {
+    background-color: var(--ab-status-danger);
+    color: var(--ab-card-bg);
+}
+
+/* ============================================================
+   Auth Card
+   ============================================================ */
+.auth-shell {
+    min-height: calc(100vh - 56px);
+}
+
+.auth-card {
+    max-width: 420px;
+    width: 100%;
+}
+
+.auth-card .auth-brand {
+    color: var(--ab-gold);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+}
+
+.verification-code-input {
+    letter-spacing: 0.4em;
+}
+
+/* ============================================================
+   Admin Tables
+   ============================================================ */
+.admin-table thead th {
+    background: var(--ab-card-bg);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.admin-delete-form {
+    margin: 0;
+}
+
+/* ============================================================
+   Toast
+   ============================================================ */
+.toast-notification {
+    bottom: 1.5rem;
+    position: fixed;
+    right: 1.5rem;
+    z-index: 9999;
+}
+
+.toast-alert {
+    min-width: 220px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast-alert.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   Code Viewer
+   ============================================================ */
+.code-viewer {
+    background: var(--ab-code-bg);
+    border-radius: 8px;
+    color: var(--ab-code-text);
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0;
+    max-height: 560px;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 1rem;
+    white-space: pre;
+}
+
+.code-viewer-placeholder {
+    color: var(--ab-code-muted);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 767.98px) {
+    .admin-table .hide-md {
+        display: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .admin-table .hide-sm {
+        display: none;
+    }
+
+    .product-card .product-img,
+    .product-card .product-img-placeholder {
+        height: 180px;
+    }
+}

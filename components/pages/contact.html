@@ -1,0 +1,177 @@
+<div class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Get in Touch</p>
+    <h1>We'd Love to <em>Hear From You</em></h1>
+    <p class="hero-sub">
+      Whether you need fragrance guidance, have a question about an order,
+      or just want to talk scent — our team is here for you.
+    </p>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7 reveal">
+        <div class="contact-form-card">
+          <h3>Request Support</h3>
+          <p class="form-sub">
+            Share your contact details and topic below and our team will
+            reach out within 24 hours.
+          </p>
+
+          <div id="contactForm">
+            <div class="form-row">
+              <div class="field-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" placeholder="Maysoon" maxlength="40" />
+                <div class="field-error" id="firstNameErr">
+                  Please enter your first name.
+                </div>
+              </div>
+              <div class="field-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" placeholder="Ahsayer" maxlength="40" />
+                <div class="field-error" id="lastNameErr">
+                  Please enter your last name.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="maysoon@example.com" />
+                <div class="field-error" id="emailErr">
+                  Please enter a valid email address.
+                </div>
+              </div>
+              <div class="field-group">
+                <label for="phone">Phone (Optional)</label>
+                <input type="tel" id="phone" placeholder="+970 59-4369494" />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="subject">Subject</label>
+              <select id="subject">
+                <option value="">— Select a topic —</option>
+                <option>Order Enquiry</option>
+                <option>Product Question</option>
+                <option>Fragrance Consultation</option>
+                <option>Loyalty Programme</option>
+                <option>Returns & Refunds</option>
+                <option>Partnership / Press</option>
+                <option>Other</option>
+              </select>
+              <div class="field-error" id="subjectErr">
+                Please select a subject.
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5" maxlength="5000" placeholder="Tell us how we can help…"></textarea>
+              <div class="field-error" id="messageErr">
+                Please write a short message.
+              </div>
+            </div>
+
+            <button class="btn-luxury" id="submitBtn" onclick="submitForm()">
+              Send Request &nbsp;<i class="bi bi-send"></i>
+            </button>
+          </div>
+
+          <div class="form-success" id="formSuccess">
+            <span class="success-icon"><i class="bi bi-check-circle"></i></span>
+            <h4>Message Sent!</h4>
+            <p>
+              Thank you for reaching out. A member of our team will respond
+              to your enquiry within 24 hours.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 reveal">
+        <div class="info-col">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+            <div>
+              <div class="info-label">Boutique Address</div>
+              <div class="info-value">
+                Qalqilya<br />West Bank, Palestine
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-telephone"></i></div>
+            <div>
+              <div class="info-label">Phone</div>
+              <div class="info-value">
+                <a href="tel:+970594369494">+970 59-4369494</a><br />
+                <span class="info-subtle">Sun – Thu, 10:00 – 20:00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-envelope"></i></div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-value">
+                <a href="mailto:contact@abstore.com">contact@abstore.com</a><br />
+                <a href="mailto:orders@abstore.com" class="info-subtle-link">orders@abstore.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hours-grid">
+            <div class="hours-title">Boutique Hours</div>
+            <div class="hours-row" id="daySun"><span class="day">Sunday</span><span class="time">10:00 – 20:00</span></div>
+            <div class="hours-row" id="dayMon"><span class="day">Monday</span><span class="time">10:00 – 20:00</span></div>
+            <div class="hours-row" id="dayTue"><span class="day">Tuesday</span><span class="time">10:00 – 20:00</span></div>
+            <div class="hours-row" id="dayWed"><span class="day">Wednesday</span><span class="time">10:00 – 20:00</span></div>
+            <div class="hours-row" id="dayThu"><span class="day">Thursday</span><span class="time">10:00 – 20:00</span></div>
+            <div class="hours-row" id="dayFri"><span class="day">Friday</span><span class="time">Closed</span></div>
+            <div class="hours-row" id="daySat"><span class="day">Saturday</span><span class="time">10:00 – 16:00</span></div>
+          </div>
+
+          <div class="social-strip">
+            <div class="hours-title">Follow Us</div>
+            <div class="social-icons-row">
+              <a href="#" class="soc-btn"><i class="bi bi-instagram"></i> Instagram</a>
+              <a href="#" class="soc-btn"><i class="bi bi-facebook"></i> Facebook</a>
+              <a href="#" class="soc-btn"><i class="bi bi-pinterest"></i> Pinterest</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="container reveal">
+    <div class="map-wrap">
+      <div id="storeMap"></div>
+      <div class="map-overlay-tag">
+        <p>AB Store Boutique</p>
+        <span>Qalqilya, Palestine · Open Today</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="floatLogo">
+  <div class="float-ring float-ring-1"></div>
+  <div class="float-ring float-ring-2"></div>
+  <div class="float-ring float-ring-3"></div>
+  <div class="float-particles">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <img src="images/logo.webp" alt="AB Store" id="floatLogoImg" />
+</div>

@@ -1,0 +1,136 @@
+.qv-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.qv-modal.open {
+  display: flex;
+}
+
+.qv-dialog {
+  background: #181714;
+  border: 1px solid #2a2720;
+  border-radius: 12px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.qv-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #7a7060;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 2;
+  line-height: 1;
+}
+
+.qv-close:hover {
+  color: #c8a96e;
+}
+
+.qv-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.qv-img-wrap {
+  position: relative;
+  background: #121110;
+  border-radius: 12px 0 0 12px;
+  overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qv-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.qv-img-ph {
+  color: #2a2720;
+  font-size: 3rem;
+}
+
+.qv-info {
+  padding: 2rem;
+}
+
+.qv-brand {
+  color: #8a7044;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+.qv-name {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #e8e0d0;
+  margin-bottom: 0.4rem;
+}
+
+.qv-meta {
+  color: #7a7060;
+  font-size: 0.82rem;
+  margin-bottom: 0.5rem;
+}
+
+.qv-stars {
+  color: #c8a96e;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.8rem;
+}
+
+.qv-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.qv-cur-price {
+  color: #c8a96e;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.qv-old-price {
+  color: #7a7060;
+  text-decoration: line-through;
+  font-size: 0.95rem;
+}
+
+.qv-add {
+  padding: 0.6rem 1.4rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 580px) {
+  .qv-body {
+    grid-template-columns: 1fr;
+  }
+
+  .qv-img-wrap {
+    border-radius: 12px 12px 0 0;
+    min-height: 200px;
+  }
+}

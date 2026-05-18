@@ -1,0 +1,32 @@
+<nav id="mainNav">
+  <a href="index.html" class="nav-brand">
+    <img src="images/logo.webp" alt="AB Store" class="nav-logo" />
+    <span class="nav-store-text">Store</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" data-nav-page="home">Home</a></li>
+    <li><a href="products.html" data-nav-page="products">Products</a></li>
+    <li><a href="about.html" data-nav-page="about">About</a></li>
+    <li><a href="contact.html" data-nav-page="contact">Contact</a></li>
+    <li><a href="loyalty.html" data-nav-page="loyalty">Loyalty</a></li>
+  </ul>
+
+  <div class="d-flex align-items-center gap-3">
+    <div class="cart-wrap" onclick="openCart()" title="View Cart">
+      <i class="bi bi-bag"></i>
+      <div class="cart-badge" id="cartBadge">0</div>
+    </div>
+    <a href="login.html" class="nav-signin-btn" id="navAuthBtn">
+      <i class="bi bi-person"></i> Sign In
+    </a>
+    <div class="nav-user-menu" id="navUserMenu" style="display: none">
+      <span class="nav-user-greeting">Hi, <strong id="navUserName"></strong></span>
+      <a href="#" id="navDashLink" class="nav-dash-link" style="display: none"></a>
+      <button class="nav-signout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

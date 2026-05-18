@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AB Store — Employee Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" href="../css-files/roles-dash/employee-dash.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <a class="brand sidebar-logo-wrap sidebar-home-link" href="../index.html">
+        <img src="../images/logo.webp" alt="AB Store" class="sidebar-logo">
+        <span class="sidebar-store-text">Store</span>
+      </a>
+      <div class="role-badge">Employee</div>
+    </div>
+    <div class="sidebar-user">
+      <strong id="sidebarName">—</strong>
+      <span id="sidebarEmail">—</span>
+    </div>
+    <nav class="nav-items">
+      <button class="nav-item active" data-panel="products">
+        <i class="bi bi-box-seam"></i> Products
+      </button>
+      <button class="nav-item" data-panel="messages">
+        <i class="bi bi-envelope"></i> Contact Messages
+      </button>
+      <a class="nav-item nav-link-item" href="../index.html" target="_blank" rel="noreferrer">
+        <i class="bi bi-shop"></i> View Store
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" id="logoutBtn">
+        <i class="bi bi-box-arrow-left"></i> Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="panel active" id="panelProducts">
+      <div class="page-header">
+        <h1>Product <em>Management</em></h1>
+        <p>Add, edit, or remove products from the store catalogue.</p>
+      </div>
+
+      <div class="card-box">
+        <h5><i class="bi bi-plus-circle"></i> Add New Product</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Brand</label>
+              <input type="text" id="newBrand" placeholder="e.g. Chanel"/>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Product Name</label>
+              <input type="text" id="newName" placeholder="e.g. No.5 EDP"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field-group">
+              <label>Price (₪)</label>
+              <input type="number" id="newPrice" placeholder="185" min="0"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field-group">
+              <label>Category</label>
+              <select id="newCategory">
+                <option value="her">For Her</option>
+                <option value="him">For Him</option>
+                <option value="unisex">Unisex</option>
+                <option value="niche">Niche</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field-group">
+              <label>Size / Type</label>
+              <input type="text" id="newSize" placeholder="100 ml · EDP"/>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="field-group">
+              <label>Product Image</label>
+              <div class="img-upload-wrap">
+                <label class="img-upload-label" for="newImage">
+                  <i class="bi bi-image"></i>
+                  <span id="newImageLabel">Click to upload image</span>
+                </label>
+                <input type="file" id="newImage" accept="image/*"/>
+              </div>
+              <div id="newImagePreview" style="display:none;margin-top:.6rem">
+                <img id="newImagePreviewImg" src="" alt="Preview" style="height:80px;width:auto;object-fit:cover;border:1px solid var(--border)"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex gap-2">
+            <button class="btn-gold" id="addProductBtn">Add Product</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-box">
+        <h5><i class="bi bi-list-ul"></i> Product Catalogue (<span id="productCount">0</span>)</h5>
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Brand & Name</th>
+              <th>Category</th>
+              <th>Size</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" id="panelMessages">
+      <div class="page-header">
+        <h1>Contact <em>Messages</em></h1>
+        <p>Messages submitted through the Contact page.</p>
+        <button class="btn-danger" id="clearAllMessagesBtn" style="margin-top:.8rem"><i class="bi bi-trash"></i> Clear All</button>
+      </div>
+      <div id="messageList"></div>
+    </div>
+
+  </main>
+
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h5><i class="bi bi-pencil-square"></i> Edit Product</h5>
+        <button class="modal-close" data-close-product-modal><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6"><div class="field-group"><label>Brand</label><input type="text" id="eBrand"/></div></div>
+        <div class="col-md-6"><div class="field-group"><label>Product Name</label><input type="text" id="eName"/></div></div>
+        <div class="col-md-4"><div class="field-group"><label>Price (₪)</label><input type="number" id="ePrice" min="0"/></div></div>
+        <div class="col-md-4"><div class="field-group"><label>Category</label>
+          <select id="eCategory">
+            <option value="her">For Her</option>
+            <option value="him">For Him</option>
+            <option value="unisex">Unisex</option>
+            <option value="niche">Niche</option>
+          </select>
+        </div></div>
+        <div class="col-md-4"><div class="field-group"><label>Size / Type</label><input type="text" id="eSize"/></div></div>
+        <div class="col-12">
+          <div class="field-group">
+            <label>Product Image</label>
+            <div class="img-upload-wrap">
+              <label class="img-upload-label" for="eImage">
+                <i class="bi bi-arrow-repeat"></i>
+                <span id="eImageLabel">Click to change image</span>
+              </label>
+              <input type="file" id="eImage" accept="image/*"/>
+            </div>
+            <div id="eImagePreview" style="margin-top:.6rem">
+              <img id="eImagePreviewImg" src="" alt="Product Image" style="height:90px;width:auto;object-fit:cover;border:1px solid var(--border)"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" data-close-product-modal>Cancel</button>
+        <button class="btn-gold" id="saveProductEditBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-box" id="toast"></div>
+
+  <script src="../js-files/roles-dash/Auth.js"></script>
+  <script src="../js-files/roles-dash/shared.js"></script>
+  <script src="../js-files/roles-dash/employee-dash.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+  <aside class="mobile-nav-panel" role="dialog" aria-label="Menu">
+    <div class="mobile-nav-header">
+      <a href="index.html" class="mobile-nav-brand" onclick="closeMobileNav()">
+        <img src="images/logo.webp" alt="AB Store" class="mobile-nav-logo" />
+        <span class="mobile-nav-brand-text">AB <em>Store</em></span>
+      </a>
+      <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <p class="mobile-nav-kicker">Navigation</p>
+
+    <nav class="mobile-nav-list">
+      <a href="index.html" data-nav-page="home" onclick="closeMobileNav()">
+        <i class="bi bi-house-door"></i>
+        <span>Home</span>
+        <i class="bi bi-chevron-right mobile-nav-chev"></i>
+      </a>
+      <a href="products.html" data-nav-page="products" onclick="closeMobileNav()">
+        <i class="bi bi-bag"></i>
+        <span>Products</span>
+        <i class="bi bi-chevron-right mobile-nav-chev"></i>
+      </a>
+      <a href="about.html" data-nav-page="about" onclick="closeMobileNav()">
+        <i class="bi bi-stars"></i>
+        <span>About</span>
+        <i class="bi bi-chevron-right mobile-nav-chev"></i>
+      </a>
+      <a href="contact.html" data-nav-page="contact" onclick="closeMobileNav()">
+        <i class="bi bi-envelope"></i>
+        <span>Contact</span>
+        <i class="bi bi-chevron-right mobile-nav-chev"></i>
+      </a>
+      <a href="loyalty.html" data-nav-page="loyalty" onclick="closeMobileNav()">
+        <i class="bi bi-gem"></i>
+        <span>Loyalty</span>
+        <i class="bi bi-chevron-right mobile-nav-chev"></i>
+      </a>
+      <a href="products.html?filter=wishlist" onclick="closeMobileNav()">
+        <i class="bi bi-heart"></i>
+        <span>Wishlist</span>
+        <i class="bi bi-chevron-right mobile-nav-chev"></i>
+      </a>
+    </nav>
+
+    <div class="mobile-nav-footer">
+      <a href="login.html" onclick="closeMobileNav()" id="mobileAuthBtn" class="mobile-nav-auth">
+        <i class="bi bi-person-circle"></i>
+        <span>Sign In</span>
+      </a>
+      <p class="mobile-nav-tag">AB Store &middot; Qalqilia</p>
+    </div>
+  </aside>
+</div>

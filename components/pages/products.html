@@ -1,0 +1,64 @@
+<div class="page-hero">
+  <div class="container reveal">
+    <p class="eyebrow">Our Collection</p>
+    <h1>Luxury <em>Fragrances</em></h1>
+    <p>Discover the world's most coveted scents, curated for the discerning few.</p>
+    <div class="page-rule"></div>
+  </div>
+</div>
+
+<section class="products-section">
+  <div class="container">
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="her">For Her</button>
+      <button class="filter-btn" data-filter="him">For Him</button>
+      <button class="filter-btn" data-filter="unisex">Unisex</button>
+      <button class="filter-btn" data-filter="niche">Niche</button>
+      <button class="filter-btn" data-filter="sale">On Sale</button>
+      <button class="filter-btn" data-filter="wishlist"><i class="bi bi-heart-fill"></i> Wishlist</button>
+
+      <span class="results-count" id="resultsCount">Showing 0 products</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="default">Sort: Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name">Name: A-Z</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+
+    <div class="search-bar reveal">
+      <i class="bi bi-search search-icon"></i>
+      <input type="search" id="productSearch" class="search-input" placeholder="Search by name or brand..." autocomplete="off" />
+      <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden>&times;</button>
+    </div>
+
+    <div class="row g-3" id="productGrid"></div>
+
+    <div class="no-results" id="noResults">
+      <i class="bi bi-search"></i>
+      No products found for this filter.
+    </div>
+  </div>
+</section>
+
+<div class="cart-toast" id="cartToast"></div>
+
+<div id="quickViewModal" class="qv-modal" onclick="if(event.target===this)closeQuickView()">
+  <div class="qv-dialog">
+    <button class="qv-close" onclick="closeQuickView()">X</button>
+    <div id="quickViewBody" class="qv-body"></div>
+  </div>
+</div>
+
+<div id="floatLogo">
+  <div class="float-ring float-ring-1"></div>
+  <div class="float-ring float-ring-2"></div>
+  <div class="float-ring float-ring-3"></div>
+  <div class="float-particles">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <img src="images/logo.webp" alt="AB Store" id="floatLogoImg" />
+</div>

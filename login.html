@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AB Store — Sign In</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="css-files/login.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <div class="left">
+        <div class="left-mesh"></div>
+        <div class="left-grain"></div>
+        <canvas id="particles"></canvas>
+
+        <div class="left-brand">AB <span>Store</span></div>
+
+        <div class="left-center">
+          <div class="bottle-wrap">
+            <img
+              class="login-art"
+              src="images/Loginback.webp"
+              alt="Luxury perfume artwork"
+            />
+          </div>
+        </div>
+
+        <div class="left-bottom">
+          <p class="left-quote">"From Qalqilya to all of the world."</p>
+          <p class="left-quote-attr">— Abo Al-Moayad · 2026</p>
+        </div>
+      </div>
+
+      <div class="right">
+        <a href="/index.html" class="back-link">
+          <i class="bi bi-arrow-left"></i> Back to Store
+        </a>
+        <div class="tabs" id="tabs">
+          <button class="tab active" onclick="switchTab('login', 0)">
+            Sign In
+          </button>
+          <button class="tab" onclick="switchTab('register', 1)">
+            Register
+          </button>
+          <div class="tab-indicator" id="tabIndicator"></div>
+        </div>
+        <div class="panel active" id="panelLogin">
+          <div class="form-heading">
+            <h1>Welcome <em>Back</em></h1>
+            <p>Sign in to access your account and loyalty rewards.</p>
+          </div>
+
+          <div class="form-msg" id="loginMsg"></div>
+
+          <div class="field">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope icon"></i>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Password</label>
+            <div class="input-wrap">
+              <i class="bi bi-lock icon"></i>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Your password"
+                style="padding-right: 2.8rem"
+              />
+              <button
+                class="pwd-eye"
+                onclick="togglePwd('loginPassword', this)"
+                type="button"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn-submit" onclick="doLogin()">
+            Sign In &nbsp;<i class="bi bi-arrow-right"></i>
+          </button>
+
+          <button
+            class="text-link-btn"
+            type="button"
+            onclick="switchTab('forgotRequest', -1)"
+          >
+            Forgot your password?
+          </button>
+        </div>
+
+        <div class="panel" id="panelRegister">
+          <div class="form-heading">
+            <h1>Create <em>Account</em></h1>
+            <p>
+              Join AB Store and start earning loyalty points on every purchase.
+            </p>
+          </div>
+
+          <div class="form-msg" id="registerMsg"></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>First Name</label>
+              <div class="input-wrap">
+                <i class="bi bi-person icon"></i>
+                <input
+                  type="text"
+                  id="regFirst"
+                  placeholder="Ahmed"
+                  maxlength="30"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label>Last Name</label>
+              <div class="input-wrap">
+                <i class="bi bi-person icon"></i>
+                <input
+                  type="text"
+                  id="regLast"
+                  placeholder="Barakat"
+                  maxlength="30"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope icon"></i>
+              <input type="email" id="regEmail" placeholder="you@example.com" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Password</label>
+              <div class="input-wrap">
+                <i class="bi bi-lock icon"></i>
+                <input
+                  type="password"
+                  id="regPassword"
+                  placeholder="Min. 6 chars"
+                  style="padding-right: 2.8rem"
+                />
+                <button
+                  class="pwd-eye"
+                  onclick="togglePwd('regPassword', this)"
+                  type="button"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Confirm Password</label>
+              <div class="input-wrap">
+                <i class="bi bi-lock icon"></i>
+                <input
+                  type="password"
+                  id="regConfirm"
+                  placeholder="Repeat"
+                  style="padding-right: 2.8rem"
+                />
+                <button
+                  class="pwd-eye"
+                  onclick="togglePwd('regConfirm', this)"
+                  type="button"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-submit" id="regBtn" onclick="doRegister()">
+            Create Account &nbsp;<i class="bi bi-send"></i>
+          </button>
+        </div>
+
+        <div class="panel" id="panelVerify">
+          <div class="form-heading">
+            <h1>Check Your <em>Email</em></h1>
+            <p>
+              We sent a 6-digit verification code. Enter it below to activate
+              your account.
+            </p>
+          </div>
+
+          <div class="form-msg" id="verifyMsg"></div>
+
+          <div class="code-row">
+            <input
+              class="code-input"
+              maxlength="1"
+              id="c0"
+              oninput="codeType(0)"
+              onkeydown="codeDel(0, event)"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="c1"
+              oninput="codeType(1)"
+              onkeydown="codeDel(1, event)"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="c2"
+              oninput="codeType(2)"
+              onkeydown="codeDel(2, event)"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="c3"
+              oninput="codeType(3)"
+              onkeydown="codeDel(3, event)"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="c4"
+              oninput="codeType(4)"
+              onkeydown="codeDel(4, event)"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="c5"
+              oninput="codeType(5)"
+              onkeydown="codeDel(5, event)"
+            />
+          </div>
+
+          <button class="btn-submit" onclick="doVerify()">
+            Verify &amp; Sign In &nbsp;<i class="bi bi-check-lg"></i>
+          </button>
+          <button class="btn-ghost-sm" onclick="switchTab('register', 1)">
+            <i class="bi bi-arrow-left"></i> &nbsp;Back
+          </button>
+        </div>
+
+        <div class="panel" id="panelForgotRequest">
+          <div class="form-heading">
+            <h1>Reset <em>Password</em></h1>
+            <p>Enter your email and we will send you a 6-digit reset code.</p>
+          </div>
+
+          <div class="form-msg" id="forgotMsg"></div>
+
+          <div class="field">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope icon"></i>
+              <input
+                type="email"
+                id="forgotEmail"
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+
+          <button
+            class="btn-submit"
+            id="forgotBtn"
+            onclick="doForgotPassword()"
+          >
+            Send Reset Code &nbsp;<i class="bi bi-send"></i>
+          </button>
+          <button class="btn-ghost-sm" onclick="switchTab('login', 0)">
+            <i class="bi bi-arrow-left"></i> &nbsp;Back to Sign In
+          </button>
+        </div>
+
+        <div class="panel" id="panelResetPassword">
+          <div class="form-heading">
+            <h1>Set New <em>Password</em></h1>
+            <p>
+              Enter the reset code from your email and choose a new password.
+            </p>
+          </div>
+
+          <div class="form-msg" id="resetMsg"></div>
+
+          <div class="field">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope icon"></i>
+              <input
+                type="email"
+                id="resetEmail"
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+
+          <div class="code-row">
+            <input
+              class="code-input"
+              maxlength="1"
+              id="rp0"
+              oninput="codeType(0, 'rp')"
+              onkeydown="codeDel(0, event, 'rp')"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="rp1"
+              oninput="codeType(1, 'rp')"
+              onkeydown="codeDel(1, event, 'rp')"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="rp2"
+              oninput="codeType(2, 'rp')"
+              onkeydown="codeDel(2, event, 'rp')"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="rp3"
+              oninput="codeType(3, 'rp')"
+              onkeydown="codeDel(3, event, 'rp')"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="rp4"
+              oninput="codeType(4, 'rp')"
+              onkeydown="codeDel(4, event, 'rp')"
+            />
+            <input
+              class="code-input"
+              maxlength="1"
+              id="rp5"
+              oninput="codeType(5, 'rp')"
+              onkeydown="codeDel(5, event, 'rp')"
+            />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>New Password</label>
+              <div class="input-wrap">
+                <i class="bi bi-lock icon"></i>
+                <input
+                  type="password"
+                  id="resetPassword"
+                  placeholder="Min. 8 chars"
+                  style="padding-right: 2.8rem"
+                />
+                <button
+                  class="pwd-eye"
+                  onclick="togglePwd('resetPassword', this)"
+                  type="button"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Confirm Password</label>
+              <div class="input-wrap">
+                <i class="bi bi-lock icon"></i>
+                <input
+                  type="password"
+                  id="resetConfirm"
+                  placeholder="Repeat"
+                  style="padding-right: 2.8rem"
+                />
+                <button
+                  class="pwd-eye"
+                  onclick="togglePwd('resetConfirm', this)"
+                  type="button"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-submit" id="resetBtn" onclick="doResetPassword()">
+            Update Password &nbsp;<i class="bi bi-check-lg"></i>
+          </button>
+          <button class="btn-ghost-sm" onclick="switchTab('forgotRequest', -1)">
+            <i class="bi bi-arrow-left"></i> &nbsp;Back
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js-files/login.js"></script>
+  </body>
+</html>

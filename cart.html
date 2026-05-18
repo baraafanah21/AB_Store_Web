@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AB Store — Cart</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" href="css-files/cart.css"/>
+  <link rel="stylesheet" href="css-files/footer.css"/>
+  <link rel="stylesheet" href="css-files/float-logo.css"/>
+  <link rel="stylesheet" href="css-files/mobile-nav.css"/>
+</head>
+<body data-page="cart">
+
+  <!-- ── NAV ── -->
+  <nav id="mainNav">
+    <a href="index.html" class="nav-brand">
+      <img src="images/logo.webp" alt="AB Store" class="nav-logo"/>
+      <span class="nav-store-text">Store</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="loyalty.html">Loyalty</a></li>
+    </ul>
+    <div class="d-flex align-items-center gap-3">
+      <div class="cart-wrap" onclick="openCart()" title="Cart">
+        <i class="bi bi-bag"></i>
+        <div class="cart-badge" id="cartBadge">0</div>
+      </div>
+      <a href="login.html" class="nav-signin-btn" id="navAuthBtn">
+        <i class="bi bi-person"></i> Sign In
+      </a>
+      <div class="nav-user-menu" id="navUserMenu" style="display:none">
+        <span class="nav-user-greeting">Hi, <strong id="navUserName"></strong></span>
+        <a href="#" id="navDashLink" class="nav-dash-link" style="display:none"></a>
+        <button class="nav-signout-btn" onclick="doLogout()">Sign Out</button>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── MOBILE NAV ── -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+    <aside class="mobile-nav-panel" role="dialog" aria-label="Menu">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="mobile-nav-brand" onclick="closeMobileNav()">
+          <img src="images/logo.webp" alt="AB Store" class="mobile-nav-logo"/>
+          <span class="mobile-nav-brand-text">AB <em>Store</em></span>
+        </a>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <p class="mobile-nav-kicker">Navigation</p>
+
+      <nav class="mobile-nav-list">
+        <a href="index.html" data-nav-page="home" onclick="closeMobileNav()">
+          <i class="bi bi-house-door"></i>
+          <span>Home</span>
+          <i class="bi bi-chevron-right mobile-nav-chev"></i>
+        </a>
+        <a href="products.html" data-nav-page="products" onclick="closeMobileNav()">
+          <i class="bi bi-bag"></i>
+          <span>Products</span>
+          <i class="bi bi-chevron-right mobile-nav-chev"></i>
+        </a>
+        <a href="about.html" data-nav-page="about" onclick="closeMobileNav()">
+          <i class="bi bi-stars"></i>
+          <span>About</span>
+          <i class="bi bi-chevron-right mobile-nav-chev"></i>
+        </a>
+        <a href="contact.html" data-nav-page="contact" onclick="closeMobileNav()">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+          <i class="bi bi-chevron-right mobile-nav-chev"></i>
+        </a>
+        <a href="loyalty.html" data-nav-page="loyalty" onclick="closeMobileNav()">
+          <i class="bi bi-gem"></i>
+          <span>Loyalty</span>
+          <i class="bi bi-chevron-right mobile-nav-chev"></i>
+        </a>
+      </nav>
+
+      <div class="mobile-nav-footer">
+        <a href="login.html" onclick="closeMobileNav()" id="mobileAuthBtn" class="mobile-nav-auth">
+          <i class="bi bi-person-circle"></i>
+          <span>Sign In</span>
+        </a>
+        <p class="mobile-nav-tag">AB Store &middot; Qalqilia</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Your Selection</p>
+      <h1 class="reveal">Shopping <em>Cart</em></h1>
+      <p class="reveal">Review your items and complete your order below.</p>
+      <div class="page-rule reveal"></div>
+    </div>
+  </div>
+
+  <!-- ── CART SECTION ── -->
+  <section class="cart-section" id="cartSection">
+    <div class="container">
+      <div class="cart-grid">
+
+        <!-- LEFT: Items -->
+        <div class="reveal">
+          <p class="section-label">Your Items</p>
+          <div class="cart-panel">
+            <div class="cart-panel-header">
+              <h2>Shopping Bag</h2>
+              <span class="cart-count-label" id="cartCountLabel">0 items</span>
+            </div>
+            <div id="cartItemsList"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Summary + Payment -->
+        <div class="cart-right">
+
+          <!-- Order Summary -->
+          <div class="summary-panel reveal" id="summarySection">
+            <div class="summary-panel-header">
+              <h3>Order Summary</h3>
+            </div>
+            <div class="summary-body">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="sumSubtotal">₪0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span id="sumShipping">₪15.00</span>
+              </div>
+              <div class="summary-row loyalty-discount-row is-hidden" id="loyaltyDiscountRow">
+                <span>Loyalty Discount</span>
+                <span id="sumLoyaltyDiscount">-₪0.00</span>
+              </div>
+              <div id="shipNote"></div>
+              <div class="summary-divider"></div>
+              <div class="loyalty-summary-panel is-hidden" id="loyaltySummaryPanel">
+                <div class="loyalty-summary-title">Loyalty Reward</div>
+                <label class="loyalty-toggle" for="useLoyaltyDiscount">
+                  <input type="checkbox" id="useLoyaltyDiscount"/>
+                  <span>
+                    <strong id="loyaltyDiscountLabel">Use loyalty discount</strong>
+                    <small id="loyaltyPointsHint">Sign in to redeem points.</small>
+                  </span>
+                </label>
+              </div>
+              <div class="summary-total">
+                <span class="summary-total-label">Total</span>
+                <span class="summary-total-val" id="sumTotal">₪0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="payment-panel reveal" id="paymentSection">
+            <div class="payment-panel-header">
+              <h3>Payment Method</h3>
+            </div>
+            <div class="payment-body">
+
+              <!-- Tabs -->
+              <div class="payment-methods">
+                <button class="pay-tab" id="tab-card" data-method="card" onclick="selectPayMethod('card')">
+                  <i class="bi bi-credit-card"></i> Card
+                </button>
+                <button class="pay-tab" id="tab-paypal" data-method="paypal" onclick="selectPayMethod('paypal')">
+                  <i class="bi bi-paypal"></i> PayPal
+                </button>
+                <button class="pay-tab" id="tab-cod" data-method="cod" onclick="selectPayMethod('cod')">
+                  <i class="bi bi-cash-coin"></i> Cash
+                </button>
+              </div>
+
+              <!-- Credit Card (hardcoded demo Visa) -->
+              <div class="pay-form" id="form-card">
+                <div class="form-group">
+                  <label>Card Number</label>
+                  <input
+                    type="text"
+                    id="cardNumber"
+                    value="4111 1111 1111 1111"
+                    maxlength="19"
+                    inputmode="numeric"
+                    autocomplete="cc-number"
+                    oninput="fmtCard(this)"
+                  />
+                  <small class="form-feedback" id="cardNumberFeedback"></small>
+                </div>
+                <div class="form-group">
+                  <label>Cardholder Name</label>
+                  <input
+                    type="text"
+                    id="cardName"
+                    value="AB Store Customer"
+                    maxlength="40"
+                    autocomplete="cc-name"
+                  />
+                  <small class="form-feedback" id="cardNameFeedback"></small>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Expiry</label>
+                    <input
+                      type="text"
+                      id="cardExpiry"
+                      value="12 / 30"
+                      maxlength="7"
+                      inputmode="numeric"
+                      autocomplete="cc-exp"
+                      oninput="fmtExpiry(this)"
+                    />
+                    <small class="form-feedback" id="cardExpiryFeedback"></small>
+                  </div>
+                  <div class="form-group">
+                    <label>CVV</label>
+                    <input
+                      type="password"
+                      id="cardCvv"
+                      value="123"
+                      maxlength="4"
+                      inputmode="numeric"
+                      autocomplete="cc-csc"
+                    />
+                    <small class="form-feedback" id="cardCvvFeedback"></small>
+                  </div>
+                </div>
+                <p class="payment-validation-note" id="cardValidationNote">
+                  Demo Visa fields are editable. Update them to see live validation before placing the order.
+                </p>
+              </div>
+
+              <!-- PayPal -->
+              <div class="pay-form" id="form-paypal">
+                <div class="paypal-panel">
+                  <p>You will be securely redirected to PayPal to complete your payment.</p>
+                  <button class="btn-paypal" onclick="placeOrder()">
+                    <i class="bi bi-paypal"></i> Pay with PayPal
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cash on Delivery -->
+              <div class="pay-form" id="form-cod">
+                <div class="cod-panel">
+                  <i class="bi bi-truck"></i>
+                  <p>Pay in cash upon delivery. Available within selected regions. Our team will confirm your order by phone.</p>
+                </div>
+              </div>
+
+              <!-- Place Order button (card + COD) -->
+              <div id="placeOrderWrap">
+                <button class="btn-order" id="placeOrderBtn" onclick="placeOrder()">
+                  <i class="bi bi-bag-check"></i> Place Order
+                </button>
+                <button class="btn-order" id="purchaseBtn" onclick="purchaseNow()" style="margin-top:10px;background:#1a8754;">
+                  <i class="bi bi-credit-card-2-front"></i> Purchase
+                </button>
+                <p class="secure-note">
+                  <i class="bi bi-shield-lock"></i> Secured &amp; encrypted checkout
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- /cart-right -->
+      </div><!-- /cart-grid -->
+    </div>
+  </section>
+
+  <!-- ── ORDER CONFIRMATION ── -->
+  <section class="confirm-section is-hidden" id="orderConfirm">
+      <div class="confirm-box reveal">
+      <div class="confirm-icon"><i class="bi bi-bag-check"></i></div>
+      <p class="eyebrow">Order Placed</p>
+      <h1>Thank You for Your <em>Order</em></h1>
+      <p id="orderConfirmText">Your order has been received and is being carefully prepared. You will receive a confirmation shortly.</p>
+      <p class="confirm-order-meta" id="orderConfirmMeta"></p>
+      <div class="invoice-panel" id="invoicePanel">
+        <div class="invoice-topbar">
+          <div class="invoice-brand">
+            <img src="images/logo.webp" alt="AB Store logo" class="invoice-logo"/>
+            <div>
+              <div class="invoice-kicker">AB Store Boutique</div>
+              <div class="invoice-title">Invoice <span class="invoice-title-ar">/ فاتورة</span></div>
+              <div class="invoice-subtitle">Luxury fragrances &amp; gifting</div>
+            </div>
+          </div>
+          <div class="invoice-contact">
+            <div class="invoice-contact-label">Issued by</div>
+            <div><strong>AB Store</strong></div>
+            <div>Qalqilya, Palestine</div>
+            <div>+970 59-4369494</div>
+            <div>contact@abstore.com</div>
+          </div>
+        </div>
+
+        <div class="invoice-grid">
+          <div class="invoice-card">
+            <div class="invoice-card-label">Billed To</div>
+            <div class="invoice-card-value" id="invoiceCustomerName">—</div>
+            <div class="invoice-card-sub" id="invoiceCustomerEmail">—</div>
+            <div class="invoice-card-sub" id="invoiceCustomerMember">—</div>
+          </div>
+          <div class="invoice-card">
+            <div class="invoice-card-label">Invoice Details</div>
+            <div class="invoice-card-value" id="invoiceOrderNumber">—</div>
+            <div class="invoice-card-sub" id="invoiceOrderDate">—</div>
+            <div class="invoice-card-sub" id="invoicePaymentMethod">—</div>
+          </div>
+        </div>
+
+        <div class="invoice-table-wrap">
+          <table class="invoice-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Line Total</th>
+              </tr>
+            </thead>
+            <tbody id="invoiceItems"></tbody>
+          </table>
+        </div>
+
+        <div class="invoice-summary">
+          <div class="invoice-summary-row">
+            <span>Subtotal</span>
+            <strong id="invoiceSubtotal">₪0.00</strong>
+          </div>
+          <div class="invoice-summary-row">
+            <span>Shipping</span>
+            <strong id="invoiceShipping">₪0.00</strong>
+          </div>
+          <div class="invoice-summary-row" id="invoiceDiscountRow">
+            <span id="invoiceDiscountLabel">Discount</span>
+            <strong id="invoiceDiscount">-₪0.00</strong>
+          </div>
+          <div class="invoice-summary-row">
+            <span>Points Earned</span>
+            <strong id="invoicePointsEarned">0</strong>
+          </div>
+          <div class="invoice-summary-row" id="invoicePointsRedeemedRow">
+            <span>Points Redeemed</span>
+            <strong id="invoicePointsRedeemed">0</strong>
+          </div>
+          <div class="invoice-summary-row total">
+            <span>Total</span>
+            <strong id="invoiceTotal">₪0.00</strong>
+          </div>
+        </div>
+
+        <div class="invoice-footer">
+          <div class="invoice-signature">
+            <div class="invoice-signature-line"></div>
+            <div class="invoice-signature-label">Authorized Signature</div>
+          </div>
+          <div class="invoice-stamp">
+            <div class="invoice-stamp-inner">
+              <span>AB</span>
+              <small>Paid</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="invoice-note">
+          Thank you for shopping with <strong>AB Store</strong>. Keep this invoice for your records and loyalty history.
+          <span class="invoice-note-meta">This is a computer-generated document and does not require a physical signature.</span>
+        </div>
+      </div>
+      <div class="confirm-actions">
+        <button class="btn-order btn-print-invoice" type="button" onclick="printInvoice()">
+          <i class="bi bi-printer"></i> Print Invoice
+        </button>
+      </div>
+      <a href="products.html" class="btn-luxury">Continue Shopping</a>
+    </div>
+  </section>
+
+  <div id="footerMount"></div>
+
+  <!-- ── FLOAT LOGO (scroll-to-top) ── -->
+  <div id="floatLogo">
+    <div class="float-ring float-ring-1"></div>
+    <div class="float-ring float-ring-2"></div>
+    <div class="float-ring float-ring-3"></div>
+    <div class="float-particles">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+    <img src="images/logo.webp" alt="AB Store" id="floatLogoImg"/>
+  </div>
+
+  <div class="cart-toast" id="cartToast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js-files/roles-dash/Auth.js"></script>
+  <script src="js-files/shared/layout.js"></script>
+  <script src="js-files/pages/cart.js"></script>
+  <script src="js-files/float-logo.js"></script>
+</body>
+</html>

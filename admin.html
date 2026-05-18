@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AB Store — Staff Gateway</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css-files/admin.css" />
+</head>
+<body class="admin-login-body admin-entry-body">
+  <div class="login-card admin-entry-card">
+    <div class="login-brand">AB <span>Store</span></div>
+    <p class="login-sub">Routing you to the correct staff area</p>
+
+    <div class="admin-entry-status" id="adminEntryStatus">
+      Checking your staff session…
+    </div>
+
+    <div class="form-msg" id="adminEntryMsg" hidden></div>
+
+    <div class="admin-entry-actions" id="adminEntryActions" hidden>
+      <a class="btn-primary admin-entry-link" id="primaryEntryAction" href="admin-login.html">Open Staff Sign In</a>
+      <a class="btn-ghost admin-entry-link" href="index.html">Go to Store</a>
+    </div>
+  </div>
+
+  <script src="js-files/roles-dash/Auth.js"></script>
+  <script src="js-files/admin/entry.js"></script>
+</body>
+</html>

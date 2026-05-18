@@ -1,0 +1,19 @@
+/*
+ * AB Store — shared component styles aggregator.
+ *
+ * Single entry point for the stylesheets that every page needs to render the
+ * shared partials (nav, mobile-nav, footer, float logo). Pages should include
+ * this file instead of remembering each individual stylesheet.
+ *
+ *   <link rel="stylesheet" href="css-files/shared/components.css" />
+ *
+ * Page-specific styles still live in css-files/<page>.css and load after this
+ * file so they can override shared component defaults when truly necessary.
+ *
+ * NOTE: nav styles are currently entangled with css-files/index.css (mixed
+ * with home-page styles). Extracting them into css-files/nav.css is the
+ * recommended next step — see the migration notes.
+ */
+@import url("../footer.css");
+@import url("../mobile-nav.css");
+@import url("../float-logo.css");

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AB Store — Admin Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../css-files/roles-dash/admin-dash.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <a class="brand sidebar-logo-wrap sidebar-home-link" href="../index.html">
+          <img src="../images/logo.webp" alt="AB Store" class="sidebar-logo" />
+          <span class="sidebar-store-text">Store</span>
+        </a>
+        <div class="role-badge">Admin</div>
+      </div>
+      <div class="sidebar-user">
+        <strong id="sidebarName">—</strong>
+        <span id="sidebarEmail">—</span>
+      </div>
+      <nav class="nav-items">
+        <button class="nav-item active" data-panel="overview">
+          <i class="bi bi-grid-1x2"></i> Overview
+        </button>
+        <button class="nav-item" data-panel="users">
+          <i class="bi bi-people"></i> Users
+        </button>
+        <button class="nav-item" data-panel="products">
+          <i class="bi bi-box-seam"></i> Products
+        </button>
+        <button class="nav-item" data-panel="messages">
+          <i class="bi bi-envelope"></i> Messages
+        </button>
+        <button class="nav-item" data-panel="reviews">
+          <i class="bi bi-chat-quote"></i> Reviews
+        </button>
+        <a class="nav-item nav-link-item" href="/index.html" target="_blank" rel="noreferrer">
+          <i class="bi bi-shop"></i> View Store
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" id="logoutBtn">
+          <i class="bi bi-box-arrow-left"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel active" id="panelOverview">
+        <div class="page-header">
+          <h1>Admin <em>Overview</em></h1>
+          <p>Store performance at a glance.</p>
+        </div>
+
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="s-label">Total Users</div>
+            <div class="s-value" id="statUsers">—</div>
+            <div class="s-sub">Registered accounts</div>
+            <i class="bi bi-people s-icon"></i>
+          </div>
+          <div class="stat-card">
+            <div class="s-label">Products</div>
+            <div class="s-value" id="statProducts">—</div>
+            <div class="s-sub">In catalogue</div>
+            <i class="bi bi-box-seam s-icon"></i>
+          </div>
+          <div class="stat-card">
+            <div class="s-label">Messages</div>
+            <div class="s-value" id="statMessages">—</div>
+            <div class="s-sub">Contact submissions</div>
+            <i class="bi bi-envelope s-icon"></i>
+          </div>
+          <div class="stat-card">
+            <div class="s-label">Cart Items</div>
+            <div class="s-value" id="statCart">—</div>
+            <div class="s-sub">In active session</div>
+            <i class="bi bi-bag s-icon"></i>
+          </div>
+        </div>
+
+        <div class="chart-row">
+          <div class="card-box">
+            <div class="card-box-head">
+              <h5><i class="bi bi-bar-chart"></i> Revenue by Category</h5>
+              <button class="btn-outline card-action-btn" id="exportRevenueBtn">
+                <i class="bi bi-file-earmark-excel"></i> Export Excel
+              </button>
+            </div>
+            <div class="bar-chart" id="barChart"></div>
+          </div>
+          <div class="card-box">
+            <h5><i class="bi bi-pie-chart"></i> User Roles</h5>
+            <div class="donut-wrap" id="donutChart"></div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h5><i class="bi bi-clock-history"></i> Recent Registrations</h5>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined</th>
+              </tr>
+            </thead>
+            <tbody id="recentUsers"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel" id="panelUsers">
+        <div class="page-header">
+          <h1>User <em>Management</em></h1>
+          <p>View, promote, or remove user accounts.</p>
+        </div>
+
+        <div class="card-box">
+          <h5><i class="bi bi-person-plus"></i> Add Employee / Admin Account</h5>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="field-group">
+                <label>Full Name</label>
+                <input type="text" id="newUserName" placeholder="Jane Smith" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="field-group">
+                <label>Email</label>
+                <input type="email" id="newUserEmail" placeholder="jane@abstore.com" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="field-group">
+                <label>Password</label>
+                <input type="password" id="newUserPwd" placeholder="Min 6 chars" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="field-group">
+                <label>Role</label>
+                <select id="newUserRole">
+                  <option value="employee">Employee</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-1 d-flex align-items-end pb-3">
+              <button class="btn-gold" id="addUserBtn">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h5><i class="bi bi-people"></i> All Accounts (<span id="userCount">0</span>)</h5>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Tier</th>
+                <th>Points</th>
+                <th>Joined</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel" id="panelProducts">
+        <div class="page-header">
+          <h1>Product <em>Management</em></h1>
+          <p>Add, edit, or remove products from the catalogue.</p>
+        </div>
+        <div class="card-box">
+          <h5><i class="bi bi-plus-circle"></i> Add New Product</h5>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="field-group">
+                <label>Brand</label>
+                <input type="text" id="aBrand" placeholder="Chanel" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="field-group">
+                <label>Name</label>
+                <input type="text" id="aName" placeholder="No.5 EDP" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="field-group">
+                <label>Price (₪)</label>
+                <input type="number" id="aPrice" placeholder="185" min="0" step="0.01" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="field-group">
+                <label>Old Price (₪)</label>
+                <input type="number" id="aOldPrice" placeholder="225" min="0" step="0.01" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="field-group">
+                <label>Category</label>
+                <select id="aCategory">
+                  <option value="her">For Her</option>
+                  <option value="him">For Him</option>
+                  <option value="unisex">Unisex</option>
+                  <option value="niche">Niche</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="field-group">
+                <label>Size / Type</label>
+                <input type="text" id="aSize" placeholder="100ml · EDP" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="field-group">
+                <label>Stars (0-5)</label>
+                <input type="number" id="aStars" placeholder="5" min="0" max="5" step="1" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="field-group">
+                <label>Badge Label</label>
+                <input type="text" id="aBadge" maxlength="24" placeholder="e.g. New, Sale, Niche" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="field-group">
+                <label>Badge Style</label>
+                <select id="aBadgeClass">
+                  <option value="">— None —</option>
+                  <option value="badge-new">badge-new</option>
+                  <option value="badge-sale">badge-sale</option>
+                  <option value="badge-niche">badge-niche</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="field-group">
+                <label>Live Preview</label>
+                <div class="badge-preview-row">
+                  <div class="badge-preview-card">
+                    <span class="product-badge" id="aBadgePreview" hidden></span>
+                    <span class="badge-preview-empty" id="aBadgeEmpty">No badge</span>
+                  </div>
+                  <button type="button" class="btn-outline btn-clear-badge" id="clearAddBadgeBtn">Clear</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="field-group">
+                <label>Product Image</label>
+                <div class="img-upload-wrap">
+                  <label class="img-upload-label" for="aImage">
+                    <i class="bi bi-image"></i>
+                    <span id="aImageLabel">Click to upload image</span>
+                  </label>
+                  <input type="file" id="aImage" accept="image/*" />
+                </div>
+                <div id="aImagePreview" style="display:none;margin-top:.6rem">
+                  <img
+                    id="aImagePreviewImg"
+                    src=""
+                    alt="Preview"
+                    style="height:80px;width:auto;object-fit:cover;border:1px solid var(--border)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn-gold" id="addProductBtn">Add Product</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-box">
+          <h5><i class="bi bi-list-ul"></i> Catalogue (<span id="adminProdCount">0</span>)</h5>
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Old Price</th>
+                <th>Stars</th>
+                <th>Badge</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminProdBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel" id="panelMessages">
+        <div class="page-header">
+          <h1>Contact <em>Messages</em></h1>
+          <p>All messages submitted through the Contact page.</p>
+          <button class="btn-danger" id="clearAllMessagesBtn" style="margin-top:.8rem">
+            <i class="bi bi-trash"></i> Clear All
+          </button>
+        </div>
+        <div id="adminMsgList"></div>
+      </div>
+
+      <div class="panel" id="panelReviews">
+        <div class="page-header">
+          <h1>Client <em>Reviews</em></h1>
+          <p>Moderate reviews posted on the home page.</p>
+          <button class="btn-danger" id="clearAllReviewsBtn" style="margin-top:.8rem">
+            <i class="bi bi-trash"></i> Clear All
+          </button>
+        </div>
+        <div id="adminReviewList"></div>
+      </div>
+    </main>
+
+    <div id="userEditModal" class="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h5><i class="bi bi-person-gear"></i> Edit User</h5>
+          <button class="modal-close" data-close-user-modal>
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <p id="editUserHint" style="margin:0 0 1rem;color:var(--ivory-dim);font-size:.78rem"></p>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Full Name</label><input type="text" id="uName" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Email</label><input type="email" id="uEmail" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Role</label>
+              <select id="uRole">
+                <option value="user">User</option>
+                <option value="employee">Employee</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>New Password</label>
+              <input type="password" id="uPassword" placeholder="Leave blank to keep current password" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Loyalty Points <span id="uPointsTier" style="font-size:.65rem;color:var(--gold);margin-left:.4rem"></span></label>
+              <input type="number" id="uLoyaltyPoints" min="0" step="1" placeholder="0" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Quick Adjust</label>
+              <div style="display:flex;gap:.4rem">
+                <input type="number" id="uPointsDelta" step="1" placeholder="e.g. 100 or -50" style="flex:1" />
+                <button type="button" class="btn-outline" style="padding:.4rem .7rem" id="applyPointsDeltaBtn">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-outline" data-close-user-modal>Cancel</button>
+          <button class="btn-gold" id="saveUserEditBtn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="editModal" class="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h5><i class="bi bi-pencil-square"></i> Edit Product</h5>
+          <button class="modal-close" data-close-product-modal>
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Brand</label><input type="text" id="eBrand" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field-group">
+              <label>Name</label><input type="text" id="eName" />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="field-group">
+              <label>Price (₪)</label><input type="number" id="ePrice" min="0" step="0.01" />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="field-group">
+              <label>Old Price (₪)</label><input type="number" id="eOldPrice" min="0" step="0.01" placeholder="Leave blank if none" />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="field-group">
+              <label>Category</label>
+              <select id="eCategory">
+                <option value="her">For Her</option>
+                <option value="him">For Him</option>
+                <option value="unisex">Unisex</option>
+                <option value="niche">Niche</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="field-group">
+              <label>Size / Type</label><input type="text" id="eSize" />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="field-group">
+              <label>Stars (0-5)</label><input type="number" id="eStars" min="0" max="5" step="1" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field-group">
+              <label>Badge Label</label>
+              <input type="text" id="eBadge" maxlength="24" placeholder="e.g. New, Sale, Niche" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field-group">
+              <label>Badge Style</label>
+              <select id="eBadgeClass">
+                <option value="">— None —</option>
+                <option value="badge-new">badge-new</option>
+                <option value="badge-sale">badge-sale</option>
+                <option value="badge-niche">badge-niche</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field-group">
+              <label>Live Preview</label>
+              <div class="badge-preview-row">
+                <div class="badge-preview-card">
+                  <span class="product-badge" id="eBadgePreview" hidden></span>
+                  <span class="badge-preview-empty" id="eBadgeEmpty">No badge</span>
+                </div>
+                <button type="button" class="btn-outline btn-clear-badge" id="clearEditBadgeBtn">Clear</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="field-group">
+              <label>Product Image</label>
+              <div class="img-upload-wrap">
+                <label class="img-upload-label" for="eImage">
+                  <i class="bi bi-arrow-repeat"></i>
+                  <span id="eImageLabel">Click to change image</span>
+                </label>
+                <input type="file" id="eImage" accept="image/*" />
+              </div>
+              <div id="eImagePreview" style="margin-top:.6rem">
+                <img
+                  id="eImagePreviewImg"
+                  src=""
+                  alt="Product Image"
+                  style="height:90px;width:auto;object-fit:cover;border:1px solid var(--border)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-outline" data-close-product-modal>Cancel</button>
+          <button class="btn-gold" id="saveProductEditBtn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-box" id="toast"></div>
+
+    <script src="../js-files/roles-dash/Auth.js"></script>
+    <script src="../js-files/roles-dash/shared.js"></script>
+    <script src="../js-files/roles-dash/admin-dash.js"></script>
+  </body>
+</html>
